@@ -1,0 +1,59 @@
+//Initial Template for Java
+
+import java.io.*;
+import java.util.*;
+
+class GFG{
+    
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        int t = Integer.parseInt(sc.next());
+        while(t>0)
+        {
+            int n = Integer.parseInt(sc.next());
+            Solution T = new Solution();
+            List<String> ans = T.AllParenthesis(n);
+            String[] sequences = ans.toArray(new String[0]);
+            Arrays.sort(sequences);
+            int k = sequences.length;
+            for(int i=0;i<k;i++)
+            {
+                System.out.println(sequences[i]);
+            }
+            
+            t--;
+            
+        }
+    }
+}
+// } Driver Code Ends
+
+
+//User function Template for Java
+
+class Solution {
+    
+    public List<String> AllParenthesis(int n) 
+    {
+        List<String> output = new ArrayList();
+        backtrack(output,"",0,0,n);
+        return output;
+    }
+    
+    private void backtrack(List<String> output, String cur_string, int open,int close,int n){
+        
+        if(cur_string.length() == n*2){
+            output.add(cur_string);
+            return;
+        }
+        
+        if(open<n)
+            backtrack(output,cur_string+"(", open+1, close,n);
+        if(close<open)
+            backtrack(output,cur_string+")", open, close+1,n);
+            
+            
+    }
+}
